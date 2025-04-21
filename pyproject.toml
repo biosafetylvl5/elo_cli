@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "elo_cli"
+version = "0.1.0"
+description = "CLI Elo Rating System for Things"
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+    "PyYAML",
+    "rich",
+    "rich-argparse"
+]
+
+[project.scripts]
+elo = "elo_cli:main"

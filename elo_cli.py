@@ -462,9 +462,14 @@ def play_single_match(
     ents = datastore.get_all_entities()
     ent_a, ent_b = smart_pairing(ents) if smart else random_pairing(ents)
     logger.info(f"Starting single match: {ent_a[1]} vs {ent_b[1]}")
-    console.rule(
-        f"[green]Match[/] {ent_a[1]} ([yellow]{ent_a[2]:.1f}[/]) vs {ent_b[1]} ([yellow]{ent_b[2]:.1f}[/])"
-    )
+    if max(len(ent_a[1]), len(ent_b[1])) > 20:
+        console.rule(f"[green]Match[/] {ent_a[1]} ([yellow]{ent_a[2]:.1f}[/])")
+        console.rule("vs")
+        console.rule(f"{ent_b[1]} ([yellow]{ent_b[2]:.1f}[/])")
+    else:
+        console.rule(
+            f"[green]Match[/] {ent_a[1]} ([yellow]{ent_a[2]:.1f}[/]) vs {ent_b[1]} ([yellow]{ent_b[2]:.1f}[/])"
+        )
     try:
         score_a, score_b = prompt_match_outcome(ent_a[1], ent_b[1])
     except SystemExit:
